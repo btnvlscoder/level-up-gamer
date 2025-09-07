@@ -57,3 +57,7 @@ aside{
     color: var(--clr-main-light);
     font-size: 0.85rem;
 }
+
+main{
+    background-color: var(--clr-main-light);
+}
