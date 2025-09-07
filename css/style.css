@@ -1,0 +1,434 @@
+/* ================================
+   Variables globales
+================================ */
+:root {
+  --clr-main: #000000;
+  --clr-main-light: #0c0c0c;
+  --clr-white: #FFFFFF;
+  --clr-gray: #D3D3D3;
+  --clr-accent-blue: #1E90FF;
+  --clr-accent-green: #39FF14;
+}
+
+/* ================================
+   Reset y tipografías
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, a, input, textarea, ul {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ================================
+   Layout general
+================================ */
+.wrapper {
+  display: grid;
+  grid-template-columns: 20% 1fr;
+  background-color: var(--clr-main);
+}
+
+aside {
+  padding: 1.5rem;
+  padding-right: 0;
+  color: var(--clr-white);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main {
+  background-color: var(--clr-main-light);
+  margin: 1rem;
+  margin-left: 0;
+  border-radius: 1rem;
+  padding: 3rem;
+}
+
+/* ================================
+   Logo e identidad
+================================ */
+.logo {
+  font-weight: 500;
+  font-size: 2rem;
+  color: var(--clr-accent-blue);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.logojpg {
+  border-radius: 2rem;
+  display: block;
+  max-width: 300px;
+  height: 200px;
+  margin: 1rem auto;
+}
+
+/* ================================
+   Menú lateral
+================================ */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.boton-menu {
+  background-color: transparent;
+  border: 0;
+  color: var(--clr-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  padding: 1rem;
+  font-size: .95rem;
+}
+
+.boton-menu.active {
+  background-color: var(--clr-main-light);
+  color: var(--clr-accent-green);
+  width: 100%;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  position: relative;
+}
+
+.boton-menu.active:after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 2rem;
+  bottom: 100%;
+  right: 0;
+  background-color: transparent;
+  border-bottom-right-radius: 1rem;
+  box-shadow: 0 1rem 0 var(--clr-main-light);
+}
+
+.boton-menu.active:before {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 2rem;
+  top: 100%;
+  right: 0;
+  background-color: transparent;
+  border-top-right-radius: 1rem;
+  box-shadow: 0 -1rem 0 var(--clr-main-light);
+}
+
+.boton-carrito {
+  margin-top: 10rem;
+}
+
+/* ================================
+   Textos generales
+================================ */
+.texto-footer {
+  color: var(--clr-gray);
+  font-size: 0.85rem;
+}
+
+.texto-small-footer {
+  color: var(--clr-gray);
+  width: 60%;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.texto-destacado {
+  font-size: 1.2rem;
+  color: var(--clr-white);
+  font-weight: 100;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.texto-destacado2 {
+  font-size: 1.2rem;
+  color: var(--clr-white);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.small-text-vision,
+.small-text-mision {
+  font-size: 1.2rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+/* ================================
+   Títulos
+================================ */
+.titulo-principal {
+  text-align: left;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--clr-accent-green);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 992px) {
+  .titulo-principal {
+    font-size: 2.5rem;
+  }
+}
+
+/* ================================
+   Productos
+================================ */
+.contenedor-productos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.producto-imagen {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 1rem;
+  display: block;
+}
+
+.producto-detalles {
+  background-color: var(--clr-main);
+  color: var(--clr-gray);
+  padding: .5rem;
+  border-radius: 1rem;
+  margin-top: -2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.producto-marca {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--clr-accent-blue);
+  font-family: 'Roboto', sans-serif;
+}
+
+.producto-titulo {
+  font-size: 1rem;
+}
+
+.producto-agregar {
+  border: 0;
+  background-color: var(--clr-accent-blue);
+  color: var(--clr-gray);
+  padding: .5rem;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color .3s, color .3s;
+}
+
+.producto-agregar:hover {
+  background-color: var(--clr-accent-green);
+  color: var(--clr-main);
+}
+
+/* ================================
+   Carrito
+================================ */
+.carrito-vacio {
+  color: var(--clr-gray);
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  display: block;
+}
+
+.contenedor-carrito {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.carrito-productos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.carrito-producto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--clr-main);
+  color: var(--clr-white);
+  padding: .5rem 1.5rem .5rem .5rem;
+  border-radius: 1rem;
+  gap: 1rem;
+}
+
+.carrito-producto img {
+  width: 60px;
+  height: 60px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.carrito-producto-nombre h3 {
+  font-size: 1rem;
+  color: var(--clr-accent-blue);
+}
+
+.carrito-producto small {
+  color: var(--clr-gray);
+  display: block;
+  font-size: 0.75rem;
+}
+
+.carrito-producto-eliminar {
+  border: none;
+  background: transparent;
+  color: red;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.carrito-producto-eliminar:hover {
+  color: var(--clr-accent-green);
+}
+
+.carrito-acciones {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carrito-acciones-vaciar,
+.carrito-acciones-comprar {
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s;
+}
+
+.carrito-acciones-vaciar {
+  background-color: var(--clr-gray);
+  color: var(--clr-main);
+}
+
+.carrito-acciones-vaciar:hover {
+  background-color: var(--clr-accent-blue);
+  color: var(--clr-white);
+}
+
+.carrito-acciones-comprar {
+  background-color: var(--clr-accent-green);
+  color: var(--clr-main);
+}
+
+.carrito-acciones-comprar:hover {
+  background-color: var(--clr-accent-blue);
+  color: var(--clr-white);
+}
+
+.carrito-acciones-total {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+}
+
+/* ================================
+   Inicio (misión, visión, etc.)
+================================ */
+.inicio-section {
+  background-color: var(--clr-main);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.inicio-subtitulo {
+  color: var(--clr-accent-blue);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.inicio-texto {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  color: var(--clr-gray);
+  line-height: 1.6;
+}
+
+.imagen-tienda-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tiendajpg {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+}
+
+/* Sección misión y visión */
+.nosotros-section {
+  padding: 2rem 0;
+  color: var(--clr-white);
+}
+
+.caja-info {
+  background-color: var(--clr-main); /* coherente con tu theme */
+  border: 1px solid var(--clr-accent-blue);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.caja-info h3 {
+  color: var(--clr-accent-blue);
+  margin-bottom: 1rem;
+}
+
+.small-text-mision,
+.small-text-vision {
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--clr-gray);
+}

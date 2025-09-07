@@ -1,4 +1,13 @@
 // js/carrito.js
+
+// Helpers de carrito
+function obtenerCarrito() {
+  return JSON.parse(localStorage.getItem("carrito-levelup")) || [];
+}
+function guardarCarrito(carrito) {
+  localStorage.setItem("carrito-levelup", JSON.stringify(carrito));
+}
+
 const contenedorCarrito = document.querySelector(".carrito-productos");
 const carritoVacio = document.querySelector(".carrito-vacio");
 const totalElemento = document.querySelector("#total");
