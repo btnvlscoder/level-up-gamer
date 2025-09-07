@@ -1,0 +1,20 @@
+.inicio-section {
+    background-color: var(--clr-main);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.inicio-subtitulo {
+    color: var(--clr-accent-blue);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.inicio-texto {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: var(--clr-gray);
+    line-height: 1.6;
+}

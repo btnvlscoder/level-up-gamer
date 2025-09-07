@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@100;300;400;500;700;900&display=swap');
+
+:root {
+    --clr-main: #000000;
+    --clr-main-light: #0c0c0c;
+    --clr-white: #FFFFFF;
+    --clr-gray: #D3D3D3;
+    --clr-accent-blue: #1E90FF;
+    --clr-accent-green: #39FF14;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,p,a,input,textarea,ul {
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
