@@ -1,0 +1,86 @@
+/* estilos.css */
+
+/* FUENTES Y TEXTO GENERAL */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #000000; /* Fondo principal negro */
+    color: #FFFFFF; /* Texto principal blanco */
+    margin: 0;
+    padding: 0;
+}
+
+/* BARRA DE NAVEGACIÓN */
+.barra-navegacion {
+    background-color: #000000;
+}
+.barra-navegacion .marca {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: #1E90FF; /* Azul eléctrico */
+}
+.barra-navegacion .enlace {
+    color: #FFFFFF;
+    transition: color 0.3s;
+}
+.barra-navegacion .enlace:hover {
+    color: #39FF14; /* Verde neón al pasar el cursor */
+}
+
+/* HEADER */
+.encabezado {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../img/header-bg.jpg') center/cover no-repeat;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 5rem 1rem;
+}
+.encabezado h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #1E90FF; /* Azul eléctrico en encabezado principal */
+}
+.encabezado .subtexto {
+    font-size: 1.3rem;
+    color: #D3D3D3; /* Gris claro para subtítulos */
+    margin-bottom: 2rem;
+}
+.boton-personalizado {
+    background-color: #39FF14; /* Verde neón */
+    color: #000000;
+    font-weight: bold;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    transition: background 0.3s, transform 0.2s;
+}
+.boton-personalizado:hover {
+    background-color: #1E90FF; /* Cambia a azul eléctrico al hover */
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+/* CATALOGO */
+#contenedor-productos .card {
+    background-color: #121212;
+    border: none;
+    color: #FFFFFF;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+#contenedor-productos .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #1E90FF;
+}
+#contenedor-productos .card img {
+    max-height: 200px;
+    object-fit: cover;
+}
+#contenedor-productos .card-body {
+    color: #D3D3D3; /* Descripciones en gris claro */
+}
+
+/* PIE DE PÁGINA */
+.pie-pagina {
+    background-color: #000000;
+    color: #D3D3D3;
+    font-size: 0.9rem;
+    padding: 1rem 0;
+}
