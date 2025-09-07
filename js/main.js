@@ -118,7 +118,7 @@ function renderizarProductos() {
                 <h3 class="producto-titulo">${prod.nombre}</h3>
                 <p class="precio">$${prod.precio.toLocaleString("es-CL")}</p>
                 <button class="producto-agregar" data-codigo="${prod.codigo}">
-                    <i class="bi bi-cart"></i>
+                    Agregar al carrito<i class="bi bi-cart"></i>
                 </button>
             </div>
         `;
