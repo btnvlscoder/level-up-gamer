@@ -3,6 +3,7 @@
 
 :root {
     --clr-main: #000000;
+    --clr-main-light: #1f1f1f;
     --clr-white: #FFFFFF;
     --clr-gray: #D3D3D3;
     --clr-accent-blue: #1E90FF;
@@ -16,7 +17,9 @@
     font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6, p, a, input, textarea, ul {
+    margin:0;
+    padding:0;
     font-family: 'Orbitron', sans-serif;
 }
 
@@ -24,7 +27,33 @@ ul {
     list-style-type: none;
 }
 
-ul li a {
+a {
     text-decoration: none;
-    color: inherit; 
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: 15% 1fr;
+    background-color: var(--clr-main);
+}
+
+aside{
+    padding: 2rem;
+    color: var(--clr-white);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo{
+    font-weight: 400;
+    font-size: 1.3rem
+}
+
+.texto-footer{
+    color: var(--clr-main-light);
+    font-size: 0.85rem;
 }
