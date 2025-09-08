@@ -5,30 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Level-Up Gamer - Inicio</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
   <div class="wrapper">
+    <!-- ASIDE -->
     <aside>
       <header>
         <a href="./index.html">
           <h1 class="logo"><i class="bi bi-joystick"></i> Level-Up Gamer</h1>
         </a>
-        <img class="logojpg" src="img/logo.jpg" width="200" alt="Logo Level-Up Gamer">
+        <img class="logojpg" src="img/logo.jpg" alt="Logo Level-Up Gamer">
         <p class="texto-destacado">¡Desafía tus límites con Level-Up Gamer!</p>
-        <p class="texto-destacado2">
-          Conviértete en el héroe de tu propia historia y únete a nuestra comunidad de jugadores.
-        </p>
+        <p class="texto-destacado2">Conviértete en el héroe de tu propia historia y únete a nuestra comunidad de jugadores.</p>
       </header>
       <nav>
         <ul class="menu">
           <li><a class="boton-menu active" href="./index.html"><i class="bi bi-house-door"></i> Inicio</a></li>
           <li><a class="boton-menu" href="./productos.html"><i class="bi bi-controller"></i> Productos</a></li>
-          <li><a class="boton-menu" href="./nosotros.html"><i class="bi bi-eye"></i> Nosotros</a></li>
           <li><a class="boton-menu" href="./contacto.html"><i class="bi bi-chat-dots-fill"></i> Contáctanos</a></li>
           <li><a class="boton-menu boton-carrito" href="./carrito.html"><i class="bi bi-cart"></i> Carrito <span class="numerito">0</span></a></li>
+          <li id="auth-menu-item">
+            <a class="boton-menu" href="./login.html"><i class="bi bi-person"></i> Iniciar Sesión</a>
+          </li>
         </ul>
       </nav>
       <footer>
@@ -37,6 +38,7 @@
       </footer>
     </aside>
 
+    <!-- MAIN -->
     <main>
       <section id="nosotros" class="nosotros-section">
         <div class="container">
@@ -44,22 +46,18 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="caja-info">
-                <h3 class="mb-4"><i class="bi bi-crosshair"></i> Nuestra Misión</h3>
+                <h3><i class="bi bi-crosshair"></i> Nuestra Misión</h3>
                 <p class="small-text-mision">
-                  Proporcionar productos de alta calidad para gamers en todo Chile, ofreciendo una experiencia de compra única y personalizada, con un enfoque en la satisfacción del cliente y el crecimiento de la comunidad gamer.
-                </p>
+                  Proporcionar productos de alta calidad para gamers en todo Chile, ofreciendo una experiencia de compra única y personalizada.</p>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="caja-info">
-                <h3 class="mb-4"><i class="bi bi-eye"></i> Nuestra Visión</h3>
-                <p class="small-text-vision">
-                  Ser la tienda online líder en productos para gamers en Chile, reconocida por su innovación, servicio al cliente excepcional, y un programa de fidelización basado en gamificación que recompense a nuestros clientes más fieles.
-                </p>
+                <h3><i class="bi bi-eye"></i> Nuestra Visión</h3>
+                <p class="small-text-vision">Ser la tienda online líder en productos gamers en Chile, reconocida por innovación y fidelización de clientes.</p>
               </div>
             </div>
-            <!-- Imagen Tienda -->
-            <div class="col-12 imagen-tienda-box mt-4">
+            <div class="col-12 imagen-tienda-box">
               <img class="tiendajpg" src="img/tienda.png" alt="Tienda Level-Up Gamer">
             </div>
           </div>
@@ -69,5 +67,6 @@
   </div>
 
   <script src="./js/main.js"></script>
+  <script src="./js/auth.js"></script>
 </body>
 </html>
