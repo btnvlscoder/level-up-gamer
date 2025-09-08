@@ -160,12 +160,6 @@ function guardarCarrito(carrito) {
   localStorage.setItem("carrito-levelup", JSON.stringify(carrito));
 }
 
-// Función para obtener el usuario actual (para el descuento)
-function getCurrentUser() {
-  const user = localStorage.getItem('currentUser');
-  return user ? JSON.parse(user) : null;
-}
-
 const contenedorProductos = document.querySelector(".contenedor-productos");
 const numerito = document.querySelector(".numerito");
 let carrito = obtenerCarrito();
@@ -218,6 +212,7 @@ document.addEventListener("click", (e) => {
 
   guardarCarrito(carrito);
   actualizarNumerito();
+  mostrarMensajeExito('Producto agregado al carrito');
 });
 
 
@@ -228,6 +223,60 @@ function actualizarNumerito() {
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
   if (numerito) numerito.textContent = totalItems;
 }
+
+// ================================
+// Mensaje de éxito
+// ================================
+function mostrarMensajeExito(mensaje) {
+  // Crear elemento de mensaje
+  const mensajeElemento = document.createElement('div');
+  mensajeElemento.className = 'mensaje-exito';
+  mensajeElemento.innerHTML = `
+    <i class="bi bi-check-circle"></i>
+    <span>${mensaje}</span>
+  `;
+  
+  // Estilos para el mensaje
+  mensajeElemento.style.position = 'fixed';
+  mensajeElemento.style.top = '20px';
+  mensajeElemento.style.right = '20px';
+  mensajeElemento.style.backgroundColor = 'var(--clr-accent-green)';
+  mensajeElemento.style.color = 'var(--clr-main)';
+  mensajeElemento.style.padding = '1rem 1.5rem';
+  mensajeElemento.style.borderRadius = '0.5rem';
+  mensajeElemento.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
+  mensajeElemento.style.zIndex = '1000';
+  mensajeElemento.style.display = 'flex';
+  mensajeElemento.style.alignItems = 'center';
+  mensajeElemento.style.gap = '0.5rem';
+  mensajeElemento.style.animation = 'slideIn 0.5s ease';
+  
+  // Añadir al documento
+  document.body.appendChild(mensajeElemento);
+  
+  // Remover después de 3 segundos
+  setTimeout(() => {
+    mensajeElemento.style.animation = 'slideOut 0.5s ease';
+    setTimeout(() => {
+      document.body.removeChild(mensajeElemento);
+    }, 500);
+  }, 3000);
+}
+
+// Añadir estilos de animación para los mensajes
+const estilosAnimacion = document.createElement('style');
+estilosAnimacion.textContent = `
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+`;
+document.head.appendChild(estilosAnimacion);
 
 // Init
 renderizarProductos();
