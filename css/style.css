@@ -1117,6 +1117,7 @@ main {
 @media (max-width: 600px) {
   .contenedor-productos {
     grid-template-columns: 1fr;
+    
   }
   
   .producto-detalle-container {
