@@ -1,7 +1,5 @@
-// js/main.js
-
 // ================================
-// Lista de productos
+// LIST DE PROD
 // ================================
 const productos = [
   {
@@ -147,11 +145,11 @@ const productos = [
     ]
   }
 ];
-// Poner productos en localStorage (para el detalle)
+// PROD A LS
 localStorage.setItem("productos-data", JSON.stringify(productos));
 
 // ================================
-// Helpers de carrito
+// HELPERS DE CARRO
 // ================================
 function obtenerCarrito() {
   return JSON.parse(localStorage.getItem("carrito-levelup")) || [];
@@ -165,7 +163,7 @@ const numerito = document.querySelector(".numerito");
 let carrito = obtenerCarrito();
 
 // ================================
-// Renderizar productos (grid)
+// RENDERIZAR PRODUCTOS (GRID)
 // ================================
 function renderizarProductos() {
   if (!contenedorProductos) return;
@@ -189,7 +187,7 @@ function renderizarProductos() {
 }
 
 // ================================
-// Manejo de clicks
+// CLICKS
 // ================================
 document.addEventListener("click", (e) => {
   const boton = e.target.closest(".producto-agregar");
@@ -203,7 +201,7 @@ document.addEventListener("click", (e) => {
   if (existente) {
     existente.cantidad++;
   } else {
-    // IMPORTANTE → guardar con imagenes (array)
+    // SAVE CON IMG
     carrito.push({
       ...prodBase,
       cantidad: 1
@@ -217,7 +215,7 @@ document.addEventListener("click", (e) => {
 
 
 // ================================
-// Numerito
+// COUNT DE CARRO
 // ================================
 function actualizarNumerito() {
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
@@ -225,7 +223,7 @@ function actualizarNumerito() {
 }
 
 // ================================
-// Mensaje de éxito
+// MENSAJE OK
 // ================================
 function mostrarMensajeExito(mensaje) {
   // Crear elemento de mensaje
@@ -236,7 +234,6 @@ function mostrarMensajeExito(mensaje) {
     <span>${mensaje}</span>
   `;
   
-  // Estilos para el mensaje
   mensajeElemento.style.position = 'fixed';
   mensajeElemento.style.top = '20px';
   mensajeElemento.style.right = '20px';
@@ -244,17 +241,16 @@ function mostrarMensajeExito(mensaje) {
   mensajeElemento.style.color = 'var(--clr-main)';
   mensajeElemento.style.padding = '1rem 1.5rem';
   mensajeElemento.style.borderRadius = '0.5rem';
-  mensajeElemento.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
+  mensajeElemento.style.boxShadow = '0 4px 15px var(--clr-main)';
   mensajeElemento.style.zIndex = '1000';
   mensajeElemento.style.display = 'flex';
   mensajeElemento.style.alignItems = 'center';
   mensajeElemento.style.gap = '0.5rem';
   mensajeElemento.style.animation = 'slideIn 0.5s ease';
   
-  // Añadir al documento
   document.body.appendChild(mensajeElemento);
   
-  // Remover después de 3 segundos
+  // DELAY
   setTimeout(() => {
     mensajeElemento.style.animation = 'slideOut 0.5s ease';
     setTimeout(() => {
@@ -278,6 +274,5 @@ estilosAnimacion.textContent = `
 `;
 document.head.appendChild(estilosAnimacion);
 
-// Init
 renderizarProductos();
 actualizarNumerito();

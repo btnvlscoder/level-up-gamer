@@ -1,12 +1,10 @@
-// js/detalle.js
-
-// Función para obtener parámetros de la URL
+// GET PARAMETROS URL
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 }
 
-// Función para formatear precios
+// FORMAT PRECIO
 function formatPrice(price) {
   return new Intl.NumberFormat('es-CL', {
     style: 'currency',
@@ -14,7 +12,7 @@ function formatPrice(price) {
   }).format(price);
 }
 
-// Código principal
+// MAIN
 document.addEventListener('DOMContentLoaded', function() {
   // Obtener el código del producto desde la URL
   const codigoProducto = getQueryParam('codigo');
@@ -24,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
-  // Obtener productos del localStorage - FORMA CORREGIDA
+  // GET DE PROD LS
   let productos = [];
   try {
     productos = JSON.parse(localStorage.getItem('productos-data')) || [];
@@ -34,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
-  // Buscar el producto
+  // SEARCH DE PROD
   const producto = productos.find(p => p.codigo === codigoProducto);
   
   if (!producto) {
@@ -42,13 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
-  // Mostrar la información del producto
   mostrarProducto(producto);
   
-  // Configurar el evento para agregar al carrito
   configurarEventoCarrito(producto);
   
-  // Inicializar contador del carrito
   actualizarContadorCarrito();
 });
 
@@ -64,7 +59,7 @@ function mostrarError(mensaje) {
     `;
   }
   
-  // Ocultar el slider
+  // HIDE
   const slider = document.querySelector('.producto-slider');
   if (slider) {
     slider.style.display = 'none';
@@ -72,7 +67,7 @@ function mostrarError(mensaje) {
 }
 
 function mostrarProducto(producto) {
-  // Actualizar la información del producto
+  // UPDATE INFO CARRO
   const titulo = document.querySelector('.producto-titulo-detalle');
   const marca = document.querySelector('.producto-marca-detalle');
   const codigoElem = document.querySelector('.producto-codigo');
@@ -87,8 +82,5 @@ function mostrarProducto(producto) {
   if (descripcion) descripcion.textContent = producto.descripcion;
   if (precio) precio.textContent = formatPrice(producto.precio);
   
-  // Configurar el slider de imágenes
   configurarSliderImagenes(producto.imagenes);
 }
-
-// ... (el resto del código de detalle.js se mantiene igual)

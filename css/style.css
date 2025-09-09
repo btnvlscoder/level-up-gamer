@@ -1,6 +1,4 @@
-/* ================================
-   Variables globales
-================================ */
+/*GLOBAL*/
 :root {
   --clr-main: #000000;
   --clr-main-light: #0c0c0c;
@@ -11,9 +9,7 @@
   --clr-accent-red: #FF3333;
 }
 
-/* ================================
-   Reset y tipografías
-================================ */
+/*TIPOGRAFIAS Y RESET*/
 * {
   margin: 0;
   padding: 0;
@@ -36,9 +32,7 @@ a {
   text-decoration: none;
 }
 
-/* ================================
-   Layout general
-================================ */
+/* GENERAL*/
 .wrapper {
   display: grid;
   grid-template-columns: 20% 1fr;
@@ -71,18 +65,19 @@ main {
   color: var(--clr-accent-blue);
   text-align: left;
   white-space: nowrap;
+  transform: translateX(-10px);
+
 }
 
 .logojpg {
   border-radius: 2rem;
   display: block;
   max-width: 200px;
-  margin: 1rem auto; 
+  margin: 1rem auto;
+  transform: translateX(-10px);
 }
 
-/* ================================
-   Menú lateral
-================================ */
+/* MENU */
 .menu {
   display: flex;
   flex-direction: column;
@@ -139,9 +134,7 @@ main {
   margin-top: 10rem;
 }
 
-/* ================================
-   Textos generales
-================================ */
+/* TEXTOS GENERALES */
 .texto-footer {
   color: var(--clr-gray);
   font-size: 0.85rem;
@@ -160,6 +153,7 @@ main {
   font-weight: 100;
   margin-top: 2rem;
   text-align: center;
+  transform: translateX(-15px);
 }
 
 .texto-destacado2 {
@@ -169,6 +163,8 @@ main {
   font-weight: 300;
   margin-top: 2rem;
   text-align: center;
+  transform: translateX(-15px);
+
 }
 
 .small-text-vision,
@@ -178,9 +174,7 @@ main {
   font-weight: 300;
 }
 
-/* ================================
-   Títulos
-================================ */
+/* TITULOS*/
 .titulo-principal {
   text-align: center;
   font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
@@ -206,9 +200,7 @@ main {
   to { width: 60px; opacity: 1; }
 }
 
-/* ================================
-   Productos - CORRECCIÓN DE IMÁGENES
-================================ */
+/* PRODUCTOS+IMG */
 .contenedor-productos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -243,10 +235,12 @@ main {
 
 .producto-imagen {
   width: 100%;
-  height: 100%;
+  height: 250px;
   object-fit: contain;
+  background: #111;
   display: block;
   transition: transform 0.3s ease;
+  padding: 0.5rem;
 }
 
 .producto:hover .producto-imagen {
@@ -315,9 +309,7 @@ main {
   color: var(--clr-main);
 }
 
-/* ================================
-   Detalle de Producto - CORRECCIÓN DE PADDING
-================================ */
+/* DETALLE PRODUCTO*/
 .producto-detalle-container {
   padding: 2rem;
   background-color: var(--clr-main-light);
@@ -515,125 +507,342 @@ main {
   transform: scale(1.1);
 }
 
-/* ================================
-   Carrito
-================================ */
+/* CARRITO*/
+.carrito-producto {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto auto;
+  gap: 1rem;
+  align-items: center;
+  background-color: var(--clr-main);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.carrito-producto-imagen {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.carrito-producto-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.carrito-producto-nombre {
+  font-size: 1rem;
+  color: var(--clr-accent-green);
+  margin-bottom: 0.25rem;
+}
+
+.carrito-producto-marca {
+  font-size: 0.8rem;
+  color: var(--clr-gray);
+  margin-bottom: 0.5rem;
+}
+
+.carrito-producto-precio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.etiqueta-precio {
+  font-size: 0.7rem;
+  color: var(--clr-gray);
+  margin-bottom: 0.25rem;
+}
+
+.carrito-producto-precio {
+  font-size: 1rem;
+  color: var(--clr-accent-blue);
+  font-weight: 600;
+}
+
+.carrito-producto-cantidad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.etiqueta-cantidad {
+  font-size: 0.7rem;
+  color: var(--clr-gray);
+  margin-bottom: 0.25rem;
+}
+
+.carrito-producto-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cantidad-btn {
+  background-color: var(--clr-accent-blue);
+  color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cantidad-numero {
+  width: 40px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--clr-accent-blue);
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  color: var(--clr-white);
+}
+
+.carrito-producto-subtotal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.etiqueta-subtotal {
+  font-size: 0.7rem;
+  color: var(--clr-gray);
+  margin-bottom: 0.25rem;
+}
+
+.carrito-producto-subtotal {
+  font-size: 1rem;
+  color: var(--clr-accent-green);
+  font-weight: 600;
+}
+
+.carrito-producto-eliminar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.etiqueta-eliminar {
+  font-size: 0.7rem;
+  color: var(--clr-gray);
+  margin-bottom: 0.25rem;
+}
+
+.carrito-producto-eliminar {
+  background: transparent;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carrito-producto-eliminar:hover {
+  color: var(--clr-accent-green);
+  transform: scale(1.1);
+}
+
 .carrito-vacio {
   color: var(--clr-gray);
   text-align: center;
   margin-top: 2rem;
   font-size: 1.2rem;
   display: block;
-}
-
-.contenedor-carrito {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  padding: 2rem;
 }
 
 .carrito-productos {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-.carrito-producto {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.carrito-resumen {
   background-color: var(--clr-main);
-  color: var(--clr-white);
-  padding: .5rem 1.5rem .5rem .5rem;
-  border-radius: 1rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.resumen-total {
+  text-align: right;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.resumen-total span {
+  color: var(--clr-accent-green);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.carrito-botones {
+  display: flex;
+  justify-content: space-between;
   gap: 1rem;
 }
 
-.carrito-producto img {
-  width: 60px;
-  height: 60px;
-  border-radius: 0.5rem;
-  object-fit: cover;
-}
-
-.carrito-producto-nombre h3 {
-  font-size: 1rem;
-  color: var(--clr-accent-green);
-}
-
-.carrito-producto-nombre{
-    font-size: 1rem;
-    color: var(--clr-accent-green);
-}
-
-.carrito-producto small {
-  color: var(--clr-gray);
-  display: block;
-  font-size: 0.75rem;
-}
-
-.carrito-producto-eliminar {
+.btn-vaciar, .btn-comprar {
+  padding: 0.8rem 1.5rem;
   border: none;
-  background: transparent;
-  color: red;
+  border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 1.2rem;
-  transition: color 0.3s;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-.carrito-producto-eliminar:hover {
-  color: var(--clr-accent-green);
+.btn-vaciar {
+  background-color: #ff4444;
+  color: white;
 }
 
-.carrito-acciones {
-  margin-top: 2rem;
+.btn-vaciar:hover {
+  background-color: #cc0000;
+}
+
+.btn-comprar {
+  background: linear-gradient(135deg, var(--clr-accent-green), #1b5e20);
+  color: white;
+}
+
+.btn-comprar:hover {
+  background: linear-gradient(135deg, #1b5e20, var(--clr-accent-green));
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE PA CARRITO */
+@media (max-width: 768px) {
+  .carrito-producto {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .carrito-producto-precio-container,
+  .carrito-producto-cantidad-container,
+  .carrito-producto-subtotal-container,
+  .carrito-producto-eliminar-container {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .carrito-botones {
+    flex-direction: column;
+  }
+}
+
+/*VOUCHER*/
+.voucher-simple {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.voucher-content {
+  background-color: white;
+  color: #333;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.voucher-content h3 {
+  color: var(--clr-accent-blue);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.voucher-details {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+}
+
+.voucher-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
 }
 
-.carrito-acciones-vaciar,
-.carrito-acciones-comprar {
-  border: none;
-  padding: 0.7rem 1.2rem;
-  border-radius: 1rem;
-  cursor: pointer;
+.voucher-total {
+  font-size: 1.2rem;
   font-weight: bold;
-  text-transform: uppercase;
-  transition: background 0.3s, color 0.3s;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--clr-accent-blue);
+  color: var(--clr-accent-green);
 }
 
-.carrito-acciones-vaciar {
+.voucher-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-imprimir, .btn-volver {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-imprimir {
+  background-color: var(--clr-accent-blue);
+  color: white;
+}
+
+.btn-volver {
   background-color: var(--clr-gray);
   color: var(--clr-main);
 }
 
-.carrito-acciones-vaciar:hover {
-  background-color: var(--clr-accent-blue);
-  color: var(--clr-white);
+/* IMPRIMIR XD */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .voucher-simple, .voucher-simple * {
+    visibility: visible;
+  }
+  .voucher-simple {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: white;
+  }
+  .voucher-actions {
+    display: none;
+  }
 }
-
-.carrito-acciones-comprar {
-  background-color: var(--clr-accent-green);
-  color: var(--clr-main);
-}
-
-.carrito-acciones-comprar:hover {
-  background-color: var(--clr-accent-blue);
-  color: var(--clr-white);
-}
-
-.carrito-acciones-total {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.2rem;
-}
-
-/* ================================
-   Inicio (misión, visión, etc.)
-================================ */
+/* HOME */
 .inicio-section {
   background-color: var(--clr-main);
   padding: 2rem;
@@ -669,7 +878,7 @@ main {
   border-radius: 1rem;
 }
 
-/* Sección misión y visión */
+/* MISION/VISION */
 .nosotros-section {
   padding: 2rem 0;
   color: var(--clr-white);
@@ -698,239 +907,129 @@ main {
   color: var(--clr-gray);
 }
 
-/* ================================
-   Formulario de contacto
-================================ */
-.contacto-form {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 2rem;
-  border-radius: 1rem;
-  max-width: 600px;
-  margin: 2rem auto;
-  box-shadow: 0 4px 20px rgba(0, 255, 100, 0.2);
-  border: 1px solid var(--clr-accent-blue);
+/* CONTACTO */
+.contacto-simple {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.contacto-form .form-group {
-  margin-bottom: 1.5rem;
+.contacto-form-simple {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 }
 
-.contacto-form label {
-  font-family: 'Orbitron';
-  color: var(--clr-white);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.contacto-form input,
-.contacto-form textarea {
-  background-color: var(--clr-gray);
-  border: 1px solid var(--clr-accent-blue);
-  color: var(--clr-white);
-  border-radius: 0.5rem;
-  padding: 0.8rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.contacto-form input:focus,
-.contacto-form textarea:focus {
-  border-color: var(--clr-accent-blue);
-  box-shadow: 0 0 8px var(--clr-accent-blue);
-  outline: none;
-}
-
-/* Botón gamer */
-.btn-enviar {
-  display: inline-block;
-  background-color: var(--clr-accent-blue);
-  color: var(--clr-white);
-  font-weight: bold;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 2rem;
-  padding: 0.9rem 2rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.btn-enviar:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 12px var(--clr-accent-green);
-}
-
-/* ================================
-   Autenticación - ESTILOS CORREGIDOS
-================================ */
-.auth-container {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: rgba(30, 30, 36, 0.95);
-  border-radius: 1rem;
-  box-shadow: 0 8px 25px rgba(57, 255, 20, 0.25);
-  border: 2px solid var(--clr-accent-blue);
-}
-
-.auth-tabs {
-  display: flex;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid var(--clr-accent-blue);
-  background-color: rgba(12, 12, 12, 0.8);
-  border-radius: 0.5rem 0.5rem 0 0;
-  overflow: hidden;
-}
-
-.auth-tab {
-  flex: 1;
-  text-align: center;
-  padding: 1rem;
-  cursor: pointer;
-  color: var(--clr-gray);
-  font-weight: 600;
-  transition: all 0.3s ease;
-  background-color: transparent;
-}
-
-.auth-tab:hover {
-  background-color: rgba(30, 144, 255, 0.1);
-}
-
-.auth-tab.active {
-  color: var(--clr-accent-green);
-  background-color: var(--clr-main-light);
-  border-bottom: 3px solid var(--clr-accent-green);
-}
-
-.auth-form {
-  display: none;
-  padding: 1.5rem;
-  background-color: rgba(20, 20, 25, 0.8);
-  border-radius: 0.5rem;
-  margin-top: 1rem;
-}
-
-.auth-form.active {
-  display: block;
-  animation: fadeIn 0.5s ease;
-}
-
-.auth-form .form-group {
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.auth-form label {
-  font-family: 'Orbitron', sans-serif;
-  color: var(--clr-accent-blue);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.auth-form input {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid var(--clr-accent-blue);
-  color: var(--clr-white);
-  border-radius: 0.5rem;
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+.contacto-form-simple textarea {
+  resize: vertical;
+  min-height: 150px;
   font-family: 'Roboto', sans-serif;
 }
 
-.auth-form input:focus {
-  border-color: var(--clr-accent-green);
-  box-shadow: 0 0 12px rgba(57, 255, 20, 0.5);
-  outline: none;
-  background-color: rgba(255, 255, 255, 0.15);
+.contacto-info {
+  background-color: rgba(20, 20, 25, 0.8);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-accent-blue);
 }
 
-.auth-form input::placeholder {
-  color: rgba(211, 211, 211, 0.6);
-}
-
-.duoc-notice {
-  color: var(--clr-accent-green) !important;
-  display: none;
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
-  background-color: rgba(57, 255, 20, 0.1);
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border-left: 3px solid var(--clr-accent-green);
-}
-
-.error-message {
-  color: #ff4444 !important;
-  display: none;
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
-  background-color: rgba(255, 68, 68, 0.1);
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border-left: 3px solid #ff4444;
-}
-
-.auth-switch {
-  text-align: center;
-  margin-top: 1.5rem;
-  color: var(--clr-gray);
-  font-size: 0.9rem;
-}
-
-.auth-switch a {
-  color: var(--clr-accent-blue);
-  cursor: pointer;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.auth-switch a:hover {
+.contacto-info h3 {
   color: var(--clr-accent-green);
-  text-decoration: underline;
+  margin-bottom: 1.5rem;
 }
 
-.auth-form .btn-enviar {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.1rem;
-  margin-top: 1rem;
-  background: linear-gradient(135deg, var(--clr-accent-blue), #1565c0);
+.contacto-info p {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--clr-white)
+}
+
+.contacto-info i {
+  color: var(--clr-accent-blue);
+  font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contacto-simple {
+    grid-template-columns: 1fr;
+  }
+}
+/* AUTH*/
+.auth-simple {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: rgba(20, 20, 25, 0.8);
+  border-radius: 1rem;
+  border: 1px solid var(--clr-accent-blue);
+}
+
+.auth-form-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: var(--clr-accent-blue);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  padding: 0.8rem;
+  border: 1px solid var(--clr-accent-blue);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--clr-white);
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--clr-accent-green);
+  box-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+}
+
+.btn-login, .btn-register {
+  padding: 0.8rem;
+  background-color: var(--clr-accent-blue);
+  color: white;
   border: none;
   border-radius: 0.5rem;
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+  font-weight: 600;
+  transition: background-color 0.3s;
 }
 
-.auth-form .btn-enviar:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(57, 255, 20, 0.6);
-  background: linear-gradient(135deg, var(--clr-accent-green), #1b5e20);
+.btn-login:hover, .btn-register:hover {
+  background-color: var(--clr-accent-green);
 }
 
-.duoc-badge {
-  background: linear-gradient(135deg, var(--clr-accent-blue), #1565c0);
-  color: white;
-  padding: 0.3rem 0.7rem;
-  border-radius: 1rem;
-  font-size: 0.75rem;
-  margin-left: 0.5rem;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(30, 144, 255, 0.4);
+.auth-links {
+  text-align: center;
+  margin-top: 1.5rem;
 }
 
-/* ================================
-   Mensajes de éxito
-================================ */
+.auth-links a {
+  color: var(--clr-accent-blue);
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+/* MSJ OK*/
 .mensaje-exito {
   position: fixed;
   top: 20px;
@@ -957,9 +1056,7 @@ main {
   to { transform: translateX(100%); opacity: 0; }
 }
 
-/* ================================
-   Responsive
-================================ */
+/* Responsive */
 @media (max-width: 1200px) {
   .contenedor-productos {
     grid-template-columns: repeat(3, 1fr);

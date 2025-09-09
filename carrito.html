@@ -11,7 +11,6 @@
 </head>
 <body>
   <div class="wrapper">
-    <!-- ASIDE -->
     <aside>
       <header>
         <a href="./index.html">
@@ -38,26 +37,40 @@
       </footer>
     </aside>
 
-    <!-- MAIN -->
     <main>
       <h2 class="titulo-principal">Carro de compras</h2>
       <div class="contenedor-carrito">
         <p class="carrito-vacio">Tu carrito está vacío <i class="bi bi-emoji-frown"></i></p>
+        
         <div class="carrito-productos"></div>
-        <div class="carrito-acciones">
-          <div class="carrito-acciones-izquierda">
-            <button class="carrito-acciones-vaciar">Vaciar carrito</button>
+        
+        <div class="carrito-resumen">
+          <div class="resumen-total">
+            <p>Total: <span id="total">$0</span></p>
           </div>
-          <div class="carrito-acciones-derecha">
-            <div class="carrito-acciones-total">
-              <p>Total</p>
-              <p id="total">$0</p>
-            </div>
-            <button class="carrito-acciones-comprar">Comprar ahora</button>
+          
+          <div class="carrito-botones">
+            <button class="btn-vaciar">Vaciar carrito</button>
+            <button class="btn-comprar">Comprar ahora</button>
           </div>
         </div>
       </div>
     </main>
+  </div>
+
+  <div class="voucher-simple" id="voucherSimple" style="display: none;">
+    <div class="voucher-content">
+      <h3><i class="bi bi-receipt"></i> Compra Realizada</h3>
+      <div class="voucher-details">
+        <p><strong>Fecha:</strong> <span id="voucherDate"></span></p>
+        <div id="voucherItems"></div>
+        <p class="voucher-total"><strong>Total:</strong> <span id="voucherTotal"></span></p>
+      </div>
+      <div class="voucher-actions">
+        <button class="btn-imprimir" onclick="imprimirVoucher()">Imprimir</button>
+        <button class="btn-volver" onclick="ocultarVoucher()">Volver al Catálogo</button>
+      </div>
+    </div>
   </div>
 
   <script src="./js/carrito.js"></script>
