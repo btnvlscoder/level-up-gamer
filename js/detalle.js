@@ -84,3 +84,74 @@ function mostrarProducto(producto) {
   
   configurarSliderImagenes(producto.imagenes);
 }
+
+// Función para configurar el slider de imágenes
+function configurarSliderImagenes(imagenes) {
+  const sliderContainer = document.querySelector('.slider-container');
+  sliderContainer.innerHTML = ''; // Limpiar contenedor
+
+  // Crear y agregar imágenes al slider
+  imagenes.forEach((src, index) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Imagen ${index + 1} del producto`;
+    img.classList.add('slider-img');
+    if (index === 0) img.classList.add('active');
+    sliderContainer.appendChild(img);
+  });
+
+  // Configurar navegación del slider
+  const prevBtn = document.querySelector('.slider-btn.prev');
+  const nextBtn = document.querySelector('.slider-btn.next');
+  let currentIndex = 0;
+
+  function showImage(index) {
+    const images = document.querySelectorAll('.slider-img');
+    images.forEach(img => img.classList.remove('active'));
+    images[index].classList.add('active');
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + imagenes.length) % imagenes.length;
+    showImage(currentIndex);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % imagenes.length;
+    showImage(currentIndex);
+  });
+}
+
+// Función para configurar evento del carrito
+function configurarEventoCarrito(producto) {
+  const botonAgregar = document.getElementById('agregar-detalle');
+  botonAgregar.addEventListener('click', () => {
+    let carrito = JSON.parse(localStorage.getItem("carrito-levelup")) || [];
+    const existente = carrito.find(p => p.codigo === producto.codigo);
+    
+    if (existente) {
+      existente.cantidad++;
+    } else {
+      carrito.push({
+        ...producto,
+        cantidad: 1
+      });
+    }
+    
+    localStorage.setItem("carrito-levelup", JSON.stringify(carrito));
+    actualizarContadorCarrito();
+    mostrarMensajeExito('Producto agregado al carrito');
+  });
+}
+
+// Función para actualizar contador del carrito
+function actualizarContadorCarrito() {
+  const carrito = JSON.parse(localStorage.getItem("carrito-levelup")) || [];
+  const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
+  
+  // Actualizar todos los elementos con clase 'numerito'
+  document.querySelectorAll('.numerito').forEach(elemento => {
+    elemento.textContent = totalItems;
+    }
+  );
+}

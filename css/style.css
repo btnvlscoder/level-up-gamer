@@ -74,7 +74,7 @@ main {
   display: block;
   max-width: 200px;
   margin: 1rem auto;
-  transform: translateX(-10px);
+  transform: translateX(-25px);
 }
 
 /* MENU */
@@ -468,12 +468,12 @@ main {
 }
 
 .btn-volver:hover {
-  background: rgba(211, 211, 211, 0.3);
+  background: var(--clr-gray);
   color: var(--clr-white);
   border-color: var(--clr-white);
 }
 
-/* Miniaturas de imágenes */
+/* MINIATURAS JPG*/
 .miniaturas-container {
   display: flex;
   gap: 0.5rem;
@@ -703,12 +703,12 @@ main {
 }
 
 .btn-comprar {
-  background: linear-gradient(135deg, var(--clr-accent-green), #1b5e20);
+  background: var(--clr-accent-green);
   color: white;
 }
 
 .btn-comprar:hover {
-  background: linear-gradient(135deg, #1b5e20, var(--clr-accent-green));
+  background: var(--clr-accent-green);
   transform: translateY(-2px);
 }
 
@@ -864,6 +864,20 @@ main {
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding-bottom: 3rem;
+}
+
+.enunciado-lvl-up-gamer h3 {
+  color: var(--clr-accent-green);
+  padding-bottom: 1rem;
+}
+
+
+.enunciado-lvl-up-gamer p {
+  font-size: 1.5rem;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300;
+  padding-bottom: 2rem;
 }
 
 .tiendajpg {
@@ -874,6 +888,46 @@ main {
 }
 
 /* MISION/VISION */
+.mensaje-principal {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  color: var(--clr-white);
+}
+
+.mensaje-principal h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--clr-white);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.small-mensaje-principal-up {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--clr-gray);
+  margin-bottom: 1.5rem;
+}
+
+.logo-mensaje-principal {
+  border-radius: 2rem;
+  max-width: 200px;
+  margin: 1.5rem auto;
+  display: block;
+}
+
+.small-mensaje-principal-down {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--clr-accent-blue);
+  margin-top: 1rem;
+}
+
 .nosotros-section {
   padding: 2rem 0;
   color: var(--clr-white);
@@ -881,16 +935,30 @@ main {
 
 .caja-info {
   background-color: var(--clr-main);
+  border: 1px solid var(--clr-accent-green);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px var();
+}
+
+.caja-info2 {
+  background-color: var(--clr-main);
   border: 1px solid var(--clr-accent-blue);
   border-radius: 1rem;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px var();
+}
+
+.caja-info p {
+  color: var(--clr-gray);
+  margin-bottom: 1rem;
 }
 
 .caja-info h3 {
-  color: var(--clr-accent-blue);
-  margin-bottom: 1rem;
+    color: var(--clr-accent-blue);
+
 }
 
 .small-text-mision,
@@ -918,9 +986,30 @@ main {
 }
 
 .contacto-form-simple textarea {
+  border-radius: 1rem;
   resize: vertical;
   min-height: 150px;
   font-family: 'Roboto', sans-serif;
+}
+
+.btn-enviar{
+  border: 0;
+  background-color: var(--clr-accent-blue);
+  color: var(--clr-gray);
+  padding: .5rem;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color .3s, color .3s;
+  font-size: 0.9rem;
+  margin-top: auto;
+  width: 50%;
+  transform: translateX(110px);  
+}
+
+.btn-enviar:hover {
+  background-color: var(--clr-accent-green);
+  color: var(--clr-main);
 }
 
 .contacto-info {
@@ -954,34 +1043,19 @@ main {
     grid-template-columns: 1fr;
   }
 }
-/* AUTH*/
-.auth-simple {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: rgba(20, 20, 25, 0.8);
-  border-radius: 1rem;
-  border: 1px solid var(--clr-accent-blue);
-}
 
-.auth-form-simple {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.form-group {
+.txt-formulario {
   display: flex;
   flex-direction: column;
 }
 
-.form-group label {
+.txt-formulario label {
   color: var(--clr-accent-blue);
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.form-group input {
+.txt-formulario input {
   padding: 0.8rem;
   border: 1px solid var(--clr-accent-blue);
   border-radius: 0.5rem;
@@ -990,40 +1064,7 @@ main {
   font-family: 'Roboto', sans-serif;
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: var(--clr-accent-green);
-  box-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
-}
 
-.btn-login, .btn-register {
-  padding: 0.8rem;
-  background-color: var(--clr-accent-blue);
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s;
-}
-
-.btn-login:hover, .btn-register:hover {
-  background-color: var(--clr-accent-green);
-}
-
-.auth-links {
-  text-align: center;
-  margin-top: 1.5rem;
-}
-
-.auth-links a {
-  color: var(--clr-accent-blue);
-  text-decoration: none;
-}
-
-.auth-links a:hover {
-  text-decoration: underline;
-}
 /* MSJ OK*/
 .mensaje-exito {
   position: fixed;
@@ -1155,4 +1196,6 @@ main {
   .precio {
     font-size: 1.1rem;
   }
+
+  
 }
