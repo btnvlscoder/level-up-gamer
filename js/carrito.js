@@ -1,23 +1,23 @@
+// STORAGE
 function obtenerCarrito() {
   return JSON.parse(localStorage.getItem("carrito-levelup")) || [];
 }
-
 function guardarCarrito(carrito) {
   localStorage.setItem("carrito-levelup", JSON.stringify(carrito));
 }
-
 function getCurrentUser() {
   const user = localStorage.getItem('currentUser');
   return user ? JSON.parse(user) : null;
 }
 
+// GLOBAL CONST & VARS
 const contenedorCarrito = document.querySelector(".carrito-productos");
 const carritoVacio = document.querySelector(".carrito-vacio");
 const totalElemento = document.querySelector("#total");
 const numerito = document.querySelector(".numerito");
-
 let carrito = obtenerCarrito();
 
+// RENDER MAIN
 function renderizarCarrito() {
   if (!contenedorCarrito) return;
 
@@ -66,24 +66,15 @@ function renderizarCarrito() {
 
   // LISTENER BTN CANTIDAD
   document.querySelectorAll('.cantidad-btn.menos').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const codigo = btn.dataset.codigo;
-      disminuirCantidad(codigo);
-    });
+    btn.addEventListener('click', () => disminuirCantidad(btn.dataset.codigo));
   });
-
   document.querySelectorAll('.cantidad-btn.mas').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const codigo = btn.dataset.codigo;
-      aumentarCantidad(codigo);
-    });
+    btn.addEventListener('click', () => aumentarCantidad(btn.dataset.codigo));
   });
-
   document.querySelectorAll('.cantidad-numero').forEach(input => {
     input.addEventListener('change', (e) => {
       const codigo = e.target.dataset.codigo;
       const nuevaCantidad = parseInt(e.target.value);
-      
       if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
         e.target.value = 1;
         actualizarCantidad(codigo, 1);
@@ -95,13 +86,14 @@ function renderizarCarrito() {
 
   // LISTENER BTN VACIAR CARRITO
   document.querySelector('.btn-vaciar').addEventListener('click', vaciarCarrito);
-  
+
   // LISTENER BTN COMPRAR
   document.querySelector('.btn-comprar').addEventListener('click', comprar);
 
   actualizarTotal();
 }
 
+// CANTIDADES
 function disminuirCantidad(codigo) {
   const item = carrito.find(item => item.codigo === codigo);
   if (item && item.cantidad > 1) {
@@ -111,7 +103,6 @@ function disminuirCantidad(codigo) {
     actualizarNumerito();
   }
 }
-
 function aumentarCantidad(codigo) {
   const item = carrito.find(item => item.codigo === codigo);
   if (item) {
@@ -121,7 +112,6 @@ function aumentarCantidad(codigo) {
     actualizarNumerito();
   }
 }
-
 function actualizarCantidad(codigo, nuevaCantidad) {
   const item = carrito.find(item => item.codigo === codigo);
   if (item) {
@@ -135,12 +125,11 @@ function actualizarCantidad(codigo, nuevaCantidad) {
 // DELEGATION TO DELETE PRODS
 document.addEventListener("click", (e) => {
   if (e.target.closest(".carrito-producto-eliminar")) {
-    const btnEliminar = e.target.closest(".carrito-producto-eliminar");
-    const codigo = btnEliminar.dataset.codigo;
-    eliminarProducto(codigo);
+    eliminarProducto(e.target.closest(".carrito-producto-eliminar").dataset.codigo);
   }
 });
 
+// CRUD CARRITO
 function eliminarProducto(codigo) {
   carrito = carrito.filter(p => p.codigo !== codigo);
   guardarCarrito(carrito);
@@ -148,10 +137,8 @@ function eliminarProducto(codigo) {
   actualizarNumerito();
   mostrarMensaje('Producto eliminado del carrito');
 }
-
 function vaciarCarrito() {
   if (carrito.length === 0) return;
-  
   if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
     carrito = [];
     guardarCarrito(carrito);
@@ -160,37 +147,30 @@ function vaciarCarrito() {
     mostrarMensaje('Carrito vaciado');
   }
 }
-
 function comprar() {
   if (carrito.length === 0) {
     mostrarMensaje('El carrito está vacío');
     return;
   }
-  
   generarVoucher();
-  
-  // MOSTRAR VOUCHER
   document.getElementById('voucherSimple').style.display = 'flex';
-  
-  // ELIMINA CARRITO AFTER BUY
   carrito = [];
   guardarCarrito(carrito);
   renderizarCarrito();
   actualizarNumerito();
 }
 
+// VOUCHER
 function generarVoucher() {
   const user = getCurrentUser();
   const descuento = user && user.isDuoc ? 0.2 : 0;
   const subtotal = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
   const total = subtotal * (1 - descuento);
-  
-  // DATE 
+
   const ahora = new Date();
   const opciones = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
   document.getElementById('voucherDate').textContent = ahora.toLocaleDateString('es-CL', opciones);
-  
-  // PRODS
+
   const voucherItems = document.getElementById('voucherItems');
   voucherItems.innerHTML = carrito.map(item => `
     <div class="voucher-item">
@@ -198,39 +178,32 @@ function generarVoucher() {
       <span>$${(item.precio * item.cantidad).toLocaleString('es-CL')}</span>
     </div>
   `).join('');
-  
-  // TOTAL
+
   document.getElementById('voucherTotal').textContent = `$${total.toLocaleString('es-CL')}`;
 }
-
 function imprimirVoucher() {
   window.print();
 }
-
 function ocultarVoucher() {
   document.getElementById('voucherSimple').style.display = 'none';
   window.location.href = 'productos.html';
 }
 
+// HELPERS
 function actualizarTotal() {
   const user = getCurrentUser();
   const descuento = user && user.isDuoc ? 0.2 : 0;
   const subtotal = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
   const total = subtotal * (1 - descuento);
-  
   totalElemento.textContent = `$${total.toLocaleString("es-CL")}`;
 }
-
 function actualizarNumerito() {
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
   if (numerito) numerito.textContent = totalItems;
-  
-  // Actualizar en todas las páginas
   document.querySelectorAll('.numerito').forEach(elemento => {
     elemento.textContent = totalItems;
   });
 }
-
 function mostrarMensaje(mensaje) {
   const mensajeElemento = document.createElement('div');
   mensajeElemento.className = 'mensaje-exito';
@@ -238,7 +211,6 @@ function mostrarMensaje(mensaje) {
     <i class="bi bi-check-circle"></i>
     <span>${mensaje}</span>
   `;
-  
   mensajeElemento.style.position = 'fixed';
   mensajeElemento.style.top = '20px';
   mensajeElemento.style.right = '20px';
@@ -252,9 +224,7 @@ function mostrarMensaje(mensaje) {
   mensajeElemento.style.alignItems = 'center';
   mensajeElemento.style.gap = '0.5rem';
   mensajeElemento.style.animation = 'slideIn 0.5s ease';
-  
   document.body.appendChild(mensajeElemento);
-  
   setTimeout(() => {
     mensajeElemento.style.animation = 'slideOut 0.5s ease';
     setTimeout(() => {
@@ -265,6 +235,6 @@ function mostrarMensaje(mensaje) {
   }, 3000);
 }
 
-// Inicializar
+// INIT
 renderizarCarrito();
 actualizarNumerito();

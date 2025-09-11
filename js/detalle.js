@@ -1,3 +1,7 @@
+// ===============================
+// HELPERS
+// ===============================
+
 // GET PARAMETROS URL
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -12,17 +16,16 @@ function formatPrice(price) {
   }).format(price);
 }
 
+// ===============================
 // MAIN
+// ===============================
 document.addEventListener('DOMContentLoaded', function() {
-  // Obtener el código del producto desde la URL
   const codigoProducto = getQueryParam('codigo');
-  
   if (!codigoProducto) {
     mostrarError('No se ha especificado un producto.');
     return;
   }
-  
-  // GET DE PROD LS
+
   let productos = [];
   try {
     productos = JSON.parse(localStorage.getItem('productos-data')) || [];
@@ -31,22 +34,21 @@ document.addEventListener('DOMContentLoaded', function() {
     mostrarError('Error al cargar la información del producto.');
     return;
   }
-  
-  // SEARCH DE PROD
+
   const producto = productos.find(p => p.codigo === codigoProducto);
-  
   if (!producto) {
     mostrarError('Producto no encontrado.');
     return;
   }
-  
+
   mostrarProducto(producto);
-  
   configurarEventoCarrito(producto);
-  
   actualizarContadorCarrito();
 });
 
+// ===============================
+// RENDER PRODUCTO
+// ===============================
 function mostrarError(mensaje) {
   const productoInfo = document.querySelector('.producto-info');
   if (productoInfo) {
@@ -58,8 +60,7 @@ function mostrarError(mensaje) {
       </div>
     `;
   }
-  
-  // HIDE
+
   const slider = document.querySelector('.producto-slider');
   if (slider) {
     slider.style.display = 'none';
@@ -67,30 +68,30 @@ function mostrarError(mensaje) {
 }
 
 function mostrarProducto(producto) {
-  // UPDATE INFO CARRO
   const titulo = document.querySelector('.producto-titulo-detalle');
   const marca = document.querySelector('.producto-marca-detalle');
   const codigoElem = document.querySelector('.producto-codigo');
   const categoria = document.querySelector('.producto-categoria');
   const descripcion = document.querySelector('.producto-descripcion');
   const precio = document.querySelector('.producto-precio');
-  
+
   if (titulo) titulo.textContent = producto.nombre;
   if (marca) marca.textContent = producto.marca;
   if (codigoElem) codigoElem.textContent = `Código: ${producto.codigo}`;
   if (categoria) categoria.textContent = `Categoría: ${producto.categoria}`;
   if (descripcion) descripcion.textContent = producto.descripcion;
   if (precio) precio.textContent = formatPrice(producto.precio);
-  
+
   configurarSliderImagenes(producto.imagenes);
 }
 
-// Función para configurar el slider de imágenes
+// ===============================
+// SLIDER IMGS
+// ===============================
 function configurarSliderImagenes(imagenes) {
   const sliderContainer = document.querySelector('.slider-container');
-  sliderContainer.innerHTML = ''; // Limpiar contenedor
+  sliderContainer.innerHTML = '';
 
-  // Crear y agregar imágenes al slider
   imagenes.forEach((src, index) => {
     const img = document.createElement('img');
     img.src = src;
@@ -100,7 +101,6 @@ function configurarSliderImagenes(imagenes) {
     sliderContainer.appendChild(img);
   });
 
-  // Configurar navegación del slider
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
   let currentIndex = 0;
@@ -122,13 +122,15 @@ function configurarSliderImagenes(imagenes) {
   });
 }
 
-// Función para configurar evento del carrito
+// ===============================
+// CARRITO
+// ===============================
 function configurarEventoCarrito(producto) {
   const botonAgregar = document.getElementById('agregar-detalle');
   botonAgregar.addEventListener('click', () => {
     let carrito = JSON.parse(localStorage.getItem("carrito-levelup")) || [];
     const existente = carrito.find(p => p.codigo === producto.codigo);
-    
+
     if (existente) {
       existente.cantidad++;
     } else {
@@ -137,21 +139,18 @@ function configurarEventoCarrito(producto) {
         cantidad: 1
       });
     }
-    
+
     localStorage.setItem("carrito-levelup", JSON.stringify(carrito));
     actualizarContadorCarrito();
     mostrarMensajeExito('Producto agregado al carrito');
   });
 }
 
-// Función para actualizar contador del carrito
 function actualizarContadorCarrito() {
   const carrito = JSON.parse(localStorage.getItem("carrito-levelup")) || [];
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
-  
-  // Actualizar todos los elementos con clase 'numerito'
+
   document.querySelectorAll('.numerito').forEach(elemento => {
     elemento.textContent = totalItems;
-    }
-  );
+  });
 }

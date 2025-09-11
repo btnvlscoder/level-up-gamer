@@ -145,6 +145,7 @@ const productos = [
     ]
   }
 ];
+
 // PROD A LS
 localStorage.setItem("productos-data", JSON.stringify(productos));
 
@@ -201,7 +202,6 @@ document.addEventListener("click", (e) => {
   if (existente) {
     existente.cantidad++;
   } else {
-    // SAVE CON IMG
     carrito.push({
       ...prodBase,
       cantidad: 1
@@ -212,7 +212,6 @@ document.addEventListener("click", (e) => {
   actualizarNumerito();
   mostrarMensajeExito('Producto agregado al carrito');
 });
-
 
 // ================================
 // COUNT DE CARRO
@@ -226,7 +225,6 @@ function actualizarNumerito() {
 // MENSAJE OK
 // ================================
 function mostrarMensajeExito(mensaje) {
-  // Crear elemento de mensaje
   const mensajeElemento = document.createElement('div');
   mensajeElemento.className = 'mensaje-exito';
   mensajeElemento.innerHTML = `
@@ -250,7 +248,6 @@ function mostrarMensajeExito(mensaje) {
   
   document.body.appendChild(mensajeElemento);
   
-  // DELAY
   setTimeout(() => {
     mensajeElemento.style.animation = 'slideOut 0.5s ease';
     setTimeout(() => {
@@ -259,7 +256,7 @@ function mostrarMensajeExito(mensaje) {
   }, 3000);
 }
 
-// Añadir estilos de animación para los mensajes
+// ANIMACIONES DE MSG
 const estilosAnimacion = document.createElement('style');
 estilosAnimacion.textContent = `
   @keyframes slideIn {
@@ -274,5 +271,8 @@ estilosAnimacion.textContent = `
 `;
 document.head.appendChild(estilosAnimacion);
 
+// ================================
+// INIT
+// ================================
 renderizarProductos();
 actualizarNumerito();
