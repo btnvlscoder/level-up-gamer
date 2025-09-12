@@ -149,9 +149,7 @@ const productos = [
 // PROD A LS
 localStorage.setItem("productos-data", JSON.stringify(productos));
 
-// ================================
 // HELPERS DE CARRO
-// ================================
 function obtenerCarrito() {
   return JSON.parse(localStorage.getItem("carrito-levelup")) || [];
 }
@@ -163,9 +161,7 @@ const contenedorProductos = document.querySelector(".contenedor-productos");
 const numerito = document.querySelector(".numerito");
 let carrito = obtenerCarrito();
 
-// ================================
 // CLICKS (AGREGAR AL CARRITO GLOBAL)
-// ================================
 document.addEventListener("click", (e) => {
   const boton = e.target.closest(".producto-agregar");
   if (!boton) return;
@@ -192,9 +188,7 @@ document.addEventListener("click", (e) => {
   mostrarMensajeExito('Producto agregado al carrito');
 });
 
-// ================================
 // COUNT DE CARRO
-// ================================
 function actualizarNumerito() {
   carrito = obtenerCarrito();
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
@@ -202,9 +196,7 @@ function actualizarNumerito() {
   document.querySelectorAll('.numerito').forEach(el => el.textContent = totalItems);
 }
 
-// ================================
 // MENSAJE OK
-// ================================
 function mostrarMensajeExito(mensaje) {
   const mensajeElemento = document.createElement('div');
   mensajeElemento.className = 'mensaje-exito';
@@ -252,9 +244,7 @@ estilosAnimacion.textContent = `
 `;
 document.head.appendChild(estilosAnimacion);
 
-// ================================
 // RENDERIZAR PRODUCTOS (GRID + FILTRO)
-// ================================
 function renderizarProductos(filtroCategoria = "todos", terminoBusqueda = "") {
   if (!contenedorProductos) return;
 
