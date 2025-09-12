@@ -1,6 +1,4 @@
-// ================================
-// LIST DE PROD
-// ================================
+// CATALOGO DE PRODUCTO
 const productos = [
   {
     codigo: "JM001",
@@ -8,7 +6,8 @@ const productos = [
     marca: "Devir",
     nombre: "Catan",
     precio: 29990,
-    descripcion: "Un clásico juego de estrategia donde los jugadores compiten por colonizar y expandirse en la isla de Catan.",
+    descripcion: 
+      "Un clásico juego de estrategia donde los jugadores compiten por colonizar y expandirse en la isla de Catan.",
     imagenes: [
       "img/productos/catan/1.jpg",
       "img/productos/catan/2.jpg",
@@ -18,7 +17,7 @@ const productos = [
   {
     codigo: "JM002",
     categoria: "Juegos de Mesa",
-    marca: "Hans im Glück",
+    marca: "Devir",
     nombre: "Carcassonne",
     precio: 24990,
     descripcion: "Juego de colocación de fichas donde los jugadores construyen el paisaje medieval de Carcassonne.",
@@ -147,12 +146,15 @@ const productos = [
 ];
 
 // PROD A LS
+
 localStorage.setItem("productos-data", JSON.stringify(productos));
 
 // HELPERS DE CARRO
+
 function obtenerCarrito() {
   return JSON.parse(localStorage.getItem("carrito-levelup")) || [];
 }
+
 function guardarCarrito(carrito) {
   localStorage.setItem("carrito-levelup", JSON.stringify(carrito));
 }
@@ -162,11 +164,13 @@ const numerito = document.querySelector(".numerito");
 let carrito = obtenerCarrito();
 
 // CLICKS (AGREGAR AL CARRITO GLOBAL)
+
 document.addEventListener("click", (e) => {
   const boton = e.target.closest(".producto-agregar");
   if (!boton) return;
 
-  // refrescar carrito (por si cambió en otra pestaña)
+  // REFRESH CARRITO POR SI CAMBIÓ EN OTRA PESTANA
+  
   carrito = obtenerCarrito();
 
   const codigo = boton.dataset.codigo;
@@ -189,10 +193,11 @@ document.addEventListener("click", (e) => {
 });
 
 // COUNT DE CARRO
+
 function actualizarNumerito() {
   carrito = obtenerCarrito();
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
-  // actualizar todas las instancias en el DOM
+  // ACTUALIZA TODAS LAS INSTANCIAS EN EL DOM
   document.querySelectorAll('.numerito').forEach(el => el.textContent = totalItems);
 }
 
@@ -296,16 +301,19 @@ function renderizarProductos(filtroCategoria = "todos", terminoBusqueda = "") {
 }
 
 // HELPERS: FILTRO UI
+
 function poblarFiltroCategorias(selectEl) {
   if (!selectEl) return;
   const cats = Array.from(new Set(productos.map(p => p.categoria))).sort();
-  // limpiar y añadir
-  selectEl.innerHTML = `<option value="todos">Todos</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join('');
+  // CLEAN & ADD
+  selectEl.innerHTML = `<option value="todos">Todos</option>` + 
+  cats.map(c => `<option value="${c}">${c}</option>`).join('');
 }
 
 // INIT & EVENTOS BUSCADOR/CATEGORIA
+
 document.addEventListener('DOMContentLoaded', () => {
-  // elementos opcionales (si existen en tu productos.html)
+  // OPC
   const inputBuscador = document.getElementById('buscador') || document.querySelector('.buscador');
   const selectCategorias = document.getElementById('filtro-categoria') || document.querySelector('.filtro-categoria');
 
@@ -319,7 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
       renderizarProductos(cat, termino);
     });
   }
-
   if (selectCategorias) {
     selectCategorias.addEventListener('change', () => {
       const termino = inputBuscador ? (inputBuscador.value || "") : "";

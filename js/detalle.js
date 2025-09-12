@@ -138,7 +138,7 @@ function configurarEventoCarrito(producto) {
 }
 
 
-// Función para actualizar contador del carrito
+// UPDATE CARRITO
 function actualizarContadorCarrito() {
   const carrito = JSON.parse(localStorage.getItem("carrito-levelup")) || [];
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
