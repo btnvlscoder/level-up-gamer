@@ -162,10 +162,8 @@ function comprar() {
 
 // VOUCHER
 function generarVoucher() {
-  const user = getCurrentUser();
-  const descuento = user && user.isDuoc ? 0.2 : 0;
   const subtotal = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
-  const total = subtotal * (1 - descuento);
+  const total = subtotal; // sin descuento
 
   const ahora = new Date();
   const opciones = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
@@ -181,12 +179,10 @@ function generarVoucher() {
 
   document.getElementById('voucherTotal').textContent = `$${total.toLocaleString('es-CL')}`;
 }
-function imprimirVoucher() {
-  window.print();
-}
-function ocultarVoucher() {
-  document.getElementById('voucherSimple').style.display = 'none';
-  window.location.href = 'productos.html';
+
+function actualizarTotal() {
+  const subtotal = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+  totalElemento.textContent = `$${subtotal.toLocaleString("es-CL")}`;
 }
 
 // HELPERS
