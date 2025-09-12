@@ -5,10 +5,7 @@ function obtenerCarrito() {
 function guardarCarrito(carrito) {
   localStorage.setItem("carrito-levelup", JSON.stringify(carrito));
 }
-function getCurrentUser() {
-  const user = localStorage.getItem('currentUser');
-  return user ? JSON.parse(user) : null;
-}
+
 
 // GLOBAL CONST & VARS
 const contenedorCarrito = document.querySelector(".carrito-productos");
