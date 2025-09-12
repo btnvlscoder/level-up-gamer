@@ -1,7 +1,4 @@
-// ===============================
 // HELPERS
-// ===============================
-
 // GET PARAMETROS URL
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -16,9 +13,7 @@ function formatPrice(price) {
   }).format(price);
 }
 
-// ===============================
 // MAIN
-// ===============================
 document.addEventListener('DOMContentLoaded', function() {
   const codigoProducto = getQueryParam('codigo');
   if (!codigoProducto) {
@@ -46,9 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
   actualizarContadorCarrito();
 });
 
-// ===============================
 // RENDER PRODUCTO
-// ===============================
 function mostrarError(mensaje) {
   const productoInfo = document.querySelector('.producto-info');
   if (productoInfo) {
@@ -85,13 +78,12 @@ function mostrarProducto(producto) {
   configurarSliderImagenes(producto.imagenes);
 }
 
-// ===============================
 // SLIDER IMGS
-// ===============================
 function configurarSliderImagenes(imagenes) {
   const sliderContainer = document.querySelector('.slider-container');
-  sliderContainer.innerHTML = '';
+  sliderContainer.innerHTML = ''; // Limpiar contenedor
 
+  // CREATE & ADD IMG SLIDER
   imagenes.forEach((src, index) => {
     const img = document.createElement('img');
     img.src = src;
@@ -101,6 +93,7 @@ function configurarSliderImagenes(imagenes) {
     sliderContainer.appendChild(img);
   });
 
+  // SLIDE NAV
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
   let currentIndex = 0;
@@ -122,15 +115,13 @@ function configurarSliderImagenes(imagenes) {
   });
 }
 
-// ===============================
 // CARRITO
-// ===============================
 function configurarEventoCarrito(producto) {
   const botonAgregar = document.getElementById('agregar-detalle');
   botonAgregar.addEventListener('click', () => {
     let carrito = JSON.parse(localStorage.getItem("carrito-levelup")) || [];
     const existente = carrito.find(p => p.codigo === producto.codigo);
-
+    
     if (existente) {
       existente.cantidad++;
     } else {
@@ -139,17 +130,20 @@ function configurarEventoCarrito(producto) {
         cantidad: 1
       });
     }
-
+    
     localStorage.setItem("carrito-levelup", JSON.stringify(carrito));
     actualizarContadorCarrito();
     mostrarMensajeExito('Producto agregado al carrito');
   });
 }
 
+
+// Función para actualizar contador del carrito
 function actualizarContadorCarrito() {
   const carrito = JSON.parse(localStorage.getItem("carrito-levelup")) || [];
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
-
+  
+  // Actualizar todos los elementos con clase 'numerito'
   document.querySelectorAll('.numerito').forEach(elemento => {
     elemento.textContent = totalItems;
   });

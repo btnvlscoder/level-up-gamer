@@ -164,35 +164,14 @@ const numerito = document.querySelector(".numerito");
 let carrito = obtenerCarrito();
 
 // ================================
-// RENDERIZAR PRODUCTOS (GRID)
-// ================================
-function renderizarProductos() {
-  if (!contenedorProductos) return;
-  contenedorProductos.innerHTML = productos.map(prod => `
-    <div class="producto">
-      <a href="detalle-producto.html?codigo=${prod.codigo}">
-        <img class="producto-imagen" src="${prod.imagenes[0]}" alt="${prod.nombre}">
-      </a>
-      <div class="producto-detalles">
-        ${prod.marca ? `<p class="producto-marca">${prod.marca}</p>` : ""}
-        <h3 class="producto-titulo">
-          <a href="detalle-producto.html?codigo=${prod.codigo}">${prod.nombre}</a>
-        </h3>
-        <p class="precio">$${Number(prod.precio).toLocaleString("es-CL")}</p>
-        <button class="producto-agregar" data-codigo="${prod.codigo}">
-          <i class="bi bi-cart"></i> Agregar
-        </button>
-      </div>
-    </div>
-  `).join("");
-}
-
-// ================================
-// CLICKS
+// CLICKS (AGREGAR AL CARRITO GLOBAL)
 // ================================
 document.addEventListener("click", (e) => {
   const boton = e.target.closest(".producto-agregar");
   if (!boton) return;
+
+  // refrescar carrito (por si cambió en otra pestaña)
+  carrito = obtenerCarrito();
 
   const codigo = boton.dataset.codigo;
   const prodBase = productos.find(p => p.codigo === codigo);
@@ -217,8 +196,10 @@ document.addEventListener("click", (e) => {
 // COUNT DE CARRO
 // ================================
 function actualizarNumerito() {
+  carrito = obtenerCarrito();
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
-  if (numerito) numerito.textContent = totalItems;
+  // actualizar todas las instancias en el DOM
+  document.querySelectorAll('.numerito').forEach(el => el.textContent = totalItems);
 }
 
 // ================================
@@ -272,7 +253,94 @@ estilosAnimacion.textContent = `
 document.head.appendChild(estilosAnimacion);
 
 // ================================
-// INIT
+// RENDERIZAR PRODUCTOS (GRID + FILTRO)
 // ================================
-renderizarProductos();
-actualizarNumerito();
+function renderizarProductos(filtroCategoria = "todos", terminoBusqueda = "") {
+  if (!contenedorProductos) return;
+
+  let productosFiltrados = productos.slice();
+
+  // FILTRO CATEGORIA
+  if (filtroCategoria && filtroCategoria !== "todos") {
+    productosFiltrados = productosFiltrados.filter(p => p.categoria === filtroCategoria);
+  }
+
+  // FILTRO SEARCH
+  if (terminoBusqueda && terminoBusqueda.trim() !== "") {
+    const t = terminoBusqueda.trim().toLowerCase();
+    productosFiltrados = productosFiltrados.filter(p =>
+      (p.nombre && p.nombre.toLowerCase().includes(t)) ||
+      (p.marca && p.marca.toLowerCase().includes(t)) ||
+      (p.categoria && p.categoria.toLowerCase().includes(t))
+    );
+  }
+
+  // NO ENCUENTRA
+  if (productosFiltrados.length === 0) {
+    contenedorProductos.innerHTML = `
+      <div class="no-resultados">
+        <i class="bi bi-exclamation-triangle"></i> No se encontraron productos.
+      </div>
+    `;
+    return;
+  }
+
+  // RENDER RESULTADO
+  contenedorProductos.innerHTML = productosFiltrados.map(prod => `
+    <div class="producto">
+      <a href="detalle-producto.html?codigo=${prod.codigo}">
+        <img class="producto-imagen" src="${prod.imagenes[0]}" alt="${prod.nombre}">
+      </a>
+      <div class="producto-detalles">
+        ${prod.marca ? `<p class="producto-marca">${prod.marca}</p>` : ""}
+        <h3 class="producto-titulo">
+          <a href="detalle-producto.html?codigo=${prod.codigo}">${prod.nombre}</a>
+        </h3>
+        <p class="precio">$${Number(prod.precio).toLocaleString("es-CL")}</p>
+        <button class="producto-agregar" data-codigo="${prod.codigo}">
+          <i class="bi bi-cart"></i> Agregar
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
+
+// HELPERS: FILTRO UI
+function poblarFiltroCategorias(selectEl) {
+  if (!selectEl) return;
+  const cats = Array.from(new Set(productos.map(p => p.categoria))).sort();
+  // limpiar y añadir
+  selectEl.innerHTML = `<option value="todos">Todos</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join('');
+}
+
+// INIT & EVENTOS BUSCADOR/CATEGORIA
+document.addEventListener('DOMContentLoaded', () => {
+  // elementos opcionales (si existen en tu productos.html)
+  const inputBuscador = document.getElementById('buscador') || document.querySelector('.buscador');
+  const selectCategorias = document.getElementById('filtro-categoria') || document.querySelector('.filtro-categoria');
+
+  // SI EXISTE
+  if (selectCategorias) poblarFiltroCategorias(selectCategorias);
+  //LISTENER
+  if (inputBuscador) {
+    inputBuscador.addEventListener('input', () => {
+      const termino = inputBuscador.value || "";
+      const cat = selectCategorias ? selectCategorias.value : "todos";
+      renderizarProductos(cat, termino);
+    });
+  }
+
+  if (selectCategorias) {
+    selectCategorias.addEventListener('change', () => {
+      const termino = inputBuscador ? (inputBuscador.value || "") : "";
+      renderizarProductos(selectCategorias.value, termino);
+    });
+  }
+
+  // INICIAR RENDERIZADO
+  const catInicial = selectCategorias ? selectCategorias.value : "todos";
+  const terminoInicial = inputBuscador ? (inputBuscador.value || "") : "";
+  renderizarProductos(catInicial, terminoInicial);
+
+  actualizarNumerito();
+});
