@@ -209,21 +209,7 @@ function mostrarMensajeExito(mensaje) {
     <i class="bi bi-check-circle"></i>
     <span>${mensaje}</span>
   `;
-  
-  mensajeElemento.style.position = 'fixed';
-  mensajeElemento.style.top = '20px';
-  mensajeElemento.style.right = '20px';
-  mensajeElemento.style.backgroundColor = 'var(--clr-accent-green)';
-  mensajeElemento.style.color = 'var(--clr-main)';
-  mensajeElemento.style.padding = '1rem 1.5rem';
-  mensajeElemento.style.borderRadius = '0.5rem';
-  mensajeElemento.style.boxShadow = '0 4px 15px var(--clr-main)';
-  mensajeElemento.style.zIndex = '1000';
-  mensajeElemento.style.display = 'flex';
-  mensajeElemento.style.alignItems = 'center';
-  mensajeElemento.style.gap = '0.5rem';
-  mensajeElemento.style.animation = 'slideIn 0.5s ease';
-  
+ 
   document.body.appendChild(mensajeElemento);
   
   setTimeout(() => {
@@ -234,22 +220,7 @@ function mostrarMensajeExito(mensaje) {
   }, 3000);
 }
 
-// ANIMACIONES DE MSG
-const estilosAnimacion = document.createElement('style');
-estilosAnimacion.textContent = `
-  @keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  
-  @keyframes slideOut {
-    from { transform: translateX(0); opacity: 1; }
-    to { transform: translateX(100%); opacity: 0; }
-  }
-`;
-document.head.appendChild(estilosAnimacion);
-
-// RENDERIZAR PRODUCTOS (GRID + FILTRO)
+// RENDERIZAR PRODUCTOS 
 function renderizarProductos(filtroCategoria = "todos", terminoBusqueda = "") {
   if (!contenedorProductos) return;
 

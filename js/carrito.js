@@ -134,6 +134,7 @@ function eliminarProducto(codigo) {
   actualizarNumerito();
   mostrarMensaje('Producto eliminado del carrito');
 }
+
 function vaciarCarrito() {
   if (carrito.length === 0) return;
   if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
@@ -182,14 +183,14 @@ function actualizarTotal() {
   totalElemento.textContent = `$${subtotal.toLocaleString("es-CL")}`;
 }
 
-// HELPERS
-function actualizarTotal() {
-  const user = getCurrentUser();
-  const descuento = user && user.isDuoc ? 0.2 : 0;
-  const subtotal = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
-  const total = subtotal * (1 - descuento);
-  totalElemento.textContent = `$${total.toLocaleString("es-CL")}`;
+function ocultarVoucher() {
+  document.getElementById('voucherSimple').style.display = 'none';
 }
+
+function imprimirVoucher() {
+  window.print();
+}
+
 function actualizarNumerito() {
   const totalItems = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
   if (numerito) numerito.textContent = totalItems;

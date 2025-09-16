@@ -965,6 +965,12 @@ main {
   color: white;
 }
 
+.btn-imprimir:hover {
+  background-color: var(--clr-accent-green);
+  color: black;
+}
+
+
 .btn-volver {
   background-color: var(--clr-gray);
   color: var(--clr-main);
